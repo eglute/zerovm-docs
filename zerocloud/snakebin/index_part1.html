@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Snakebin</title>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Called when a script posting is successful.
+            var saveSuccess = function(data, textStatus, jqXHR) {
+                var url = jqXHR.responseText;
+                $('#save-status').html(
+                    'Saved to <a id="save-url" href="' + url
+                    + '">' + url + '</a>'
+                );
+            };
+
+            // Attach save functionality to the "Save" button
+            $('#save').click(function() {
+                var request = {
+                    'url': window.location.href,
+                    'type': 'post',
+                    'data': $('#code').val(),
+                    'headers': {
+                        'X-Zerovm-Execute': 'api/1.0'
+                    },
+                    'success': saveSuccess
+                };
+                $.ajax(request);
+            });
+        });
+    </script>
+  </head>
+  <body>
+    <textarea id="code" rows="15" cols="80" wrap="off"
+              autocorrect="off" autocomplete="off"
+              autocapitalize="off" spellcheck="false"
+              style="font-family: monospace;">{code}</textarea>
+    <p>
+      <input id="save" type="submit" value="Save" />
+      <div id="save-status"></div>
+    </p>
+  </body>
+</html>
