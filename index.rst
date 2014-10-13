@@ -45,6 +45,7 @@ ZeroVM: Lightweight, single process sandbox
    zerovm/filesystem
    zerovm/channels_io
    zerovm/manifest
+   zerovm/application_execution
    zerovm/embed
 
 .. _zerocloud:
